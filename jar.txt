@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <!-- ✅ FIXED: Correct casing -->
+    <groupId>CSMB</groupId>
+    <artifactId>HotelReservationSystem</artifactId>
+    <packaging>jar</packaging>  <!-- ✅ KEPT AS JAR -->
+    <version>1.0-SNAPSHOT</version>
+    <name>Hotel Reservation System</name>
+    <url>http://localhost:8345/HRS</url>
+
+    <!-- ✅ ADDED: Properties section -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- MySQL Database -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>  <!-- ✅ FIXED: Correct artifact ID -->
+            <version>8.0.33</version>                      <!-- ✅ UPDATED: Modern version -->
+        </dependency>
+
+        <!-- JUnit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>           <!-- ✅ UPDATED: JUnit 5 -->
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>                      <!-- ✅ ADDED: Missing version -->
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>HRS</finalName>
+        <plugins>
+            <!-- Maven Compiler Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+
+            <!-- ✅ ADDED: Main Class Configuration (if you have a main class) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.csmb.HotelReservationSystem.Main</mainClass>
+                            <!-- Replace with your actual main class path -->
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- ✅ ADDED: Assembly Plugin for executable JAR with dependencies -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.csmb.HotelReservationSystem.Main</mainClass>
+                            <!-- Replace with your actual main class path -->
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
